@@ -101,6 +101,27 @@ def GravaDadosNewUser():
         tela_criar_login.frame_1.show()
         #return GravaDadosNewUser()
 
+class CadastroFisico:
+    def __init__(self):
+        #aviso = dados_pfisica.DadosPfisica()
+    
+        input_cpf = tela_formulario.input_cpf.text()
+        input_nome = tela_formulario.input_nome.text()
+        input_endereco = tela_formulario.input_endereco.text()
+        input_cep = tela_formulario.input_cep.text()
+        input_uf = tela_formulario.input_uf.text()
+        input_cidade = tela_formulario.input_cidade.text()
+        input_TelefoneFixo = tela_formulario.input_TelefoneFixo.text()
+        input_TelefoneCelular = tela_formulario.input_TelefoneCelular.text()
+        input_email = tela_formulario.input_email.text()
+
+        send_db = dados_pfisica.DadosPfisica(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
+
+class Notificacoes:
+    def __init__(self):
+        self.aviso_01 = tela_formulario.aviso_01.setText("*")
+        
+''''
 def GravaDadosCadastro():
     #aviso = dados_pfisica.DadosPfisica()
     
@@ -116,6 +137,7 @@ def GravaDadosCadastro():
 
     send_db = dados_pfisica.DadosPfisica(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
     #send_db = data_base.WriteDb(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
+'''
 
 def LimparCampos():        
     input_cpf = tela_formulario.input_cpf.clear()
@@ -148,7 +170,7 @@ tela_formulario.volta_for_opcoes.clicked.connect(Volta_for_opcoes)
 tela_login.criar_login.clicked.connect(Criarlogin)
 tela_criar_login.cadastra_user.clicked.connect(GravaDadosNewUser)
 tela_criar_login.volta_for_login.clicked.connect(Volta_for_login_Two)
-tela_formulario.salva_infos.clicked.connect(GravaDadosCadastro)
+tela_formulario.salva_infos.clicked.connect(CadastroFisico)
 tela_login.line_pwd.setEchoMode(QtWidgets.QLineEdit.Password)
 tela_criar_login.line_new_pwd.setEchoMode(QtWidgets.QLineEdit.Password)
 

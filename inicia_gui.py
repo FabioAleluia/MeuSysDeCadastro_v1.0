@@ -101,7 +101,8 @@ def GravaDadosNewUser():
         #return GravaDadosNewUser()
 
 def GravaDadosCadastro():
-
+    #aviso = dados_pfisica.DadosPfisica()
+    
     input_cpf = tela_formulario.input_cpf.text()
     input_nome = tela_formulario.input_nome.text()
     input_endereco = tela_formulario.input_endereco.text()
@@ -115,7 +116,7 @@ def GravaDadosCadastro():
     send_db = dados_pfisica.DadosPfisica(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
     #send_db = data_base.WriteDb(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
 
-        
+def LimparCampos():        
     input_cpf = tela_formulario.input_cpf.clear()
     tela_formulario.aviso_dados_errados.setText("")
     tela_formulario.aviso_01.setText("")
@@ -127,6 +128,7 @@ def GravaDadosCadastro():
     input_TelefoneFixo = tela_formulario.input_TelefoneFixo.clear()
     input_TelefoneCelular = tela_formulario.input_TelefoneCelular.clear()
     input_email = tela_formulario.input_email.clear()
+
         
 app=QtWidgets.QApplication([])
 

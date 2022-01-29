@@ -1,7 +1,6 @@
 import sqlite3
 
 class WriteDb:
-
     def __init__(self, cpf, nome, endereco, cep, uf, cidade, telefonefixo, telefonecelular, email):
         self.cpf = cpf
         self.nome = nome

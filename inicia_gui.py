@@ -53,6 +53,7 @@ def Volta_for_login_Two():
     tela_login.show()
 
 def Volta_for_opcoes():
+    LimparCampos()
     tela_formulario.close()
     tela_opcoes.show()
 

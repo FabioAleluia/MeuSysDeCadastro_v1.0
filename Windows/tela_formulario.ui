@@ -228,7 +228,7 @@ QLineEdit:focus {
      <enum>Qt::LogicalMoveStyle</enum>
     </property>
     <property name="clearButtonEnabled">
-     <bool>true</bool>
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QLineEdit" name="input_nome">

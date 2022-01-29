@@ -14,16 +14,28 @@ class DadosPfisica:
         self.telefonecelular = telefonecelular
         self.email = email
 
-        if self.cpf.isdigit():
-            cpf_oneze = (self.cpf[:11])
-            print(cpf_oneze)
-            print('Sim')
+        if self.cpf.isdigit(): # Contem algum digitio ?
+            cpf_onze = (self.cpf[:11])
+            cpf_onze = len(cpf_onze)
+            if cpf_onze < 11 or cpf_onze > 11:
+                print('Cpf invalido')
             
-            print(type(self.cpf))
-            send_db = data_base.WriteDb(cpf=self.cpf, nome=self.nome, endereco=self.endereco, cep=self.cep, uf=self.uf, cidade=self.cidade, telefonefixo=self.telefonefixo, telefonecelular=self.telefonecelular, email=self.email)
+            else:
+                print('Cpf valido')
             
-        else:
-            print('Nao')
+                
+            #send_db = data_base.WriteDb(cpf=self.cpf, nome=self.nome, endereco=self.endereco, cep=self.cep, uf=self.uf, cidade=self.cidade, telefonefixo=self.telefonefixo, telefonecelular=self.telefonecelular, email=self.email)
+            
+        if self.nome.isdigit():
+            self.nome = (self.nome[:50])
+            self.nome = len(self.nome)
+            if self.nome < 50 or self.nome > 50:
+                print('Nome muito extenso')
+            
+            if self.nome.isnumeric():
+                print('Não tem Numero')
+            
+            else:
+                print('Contem Numero')
         
         
-            #send_db = data_base.WriteDb(cpf=self.cpf, nome=self.nome, endereco=self.endereco, cep=self.cep, uf=self.uf, cidade=self.cidade, telefonefixo=self.TelefoneFixo, telefonecelular=self.TelefoneCelular, email=self.email)

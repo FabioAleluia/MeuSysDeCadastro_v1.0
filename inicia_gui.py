@@ -8,9 +8,6 @@ from Banco_db import query_db
 from Banco_db import teste
 from Windows import Janelas
 
-#Win = Janelas.GetJanelas()
-#win = Win.win_login
-
 def valida_login():
     tela_login.aviso_login.setText("")
     info_user = tela_login.line_user.text()

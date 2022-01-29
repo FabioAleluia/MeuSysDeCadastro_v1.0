@@ -7,6 +7,7 @@ from Banco_db import data_base
 from Banco_db import query_db
 from Banco_db import teste
 from Windows import Janelas
+from Valid_Dados import dados_pfisica
 
 def valida_login():
     tela_login.aviso_login.setText("")
@@ -101,27 +102,18 @@ def GravaDadosNewUser():
 
 def GravaDadosCadastro():
 
-    input_cpf = str(tela_formulario.input_cpf.text())
+    input_cpf = tela_formulario.input_cpf.text()
+    input_nome = tela_formulario.input_nome.text()
+    input_endereco = tela_formulario.input_endereco.text()
+    input_cep = tela_formulario.input_cep.text()
+    input_uf = tela_formulario.input_uf.text()
+    input_cidade = tela_formulario.input_cidade.text()
+    input_TelefoneFixo = tela_formulario.input_TelefoneFixo.text()
+    input_TelefoneCelular = tela_formulario.input_TelefoneCelular.text()
+    input_email = tela_formulario.input_email.text()
 
-    if not input_cpf.isdecimal():
-        tela_formulario.aviso_dados_errados.setText("Favor preencha os campos corretamente")
-        tela_formulario.aviso_01.setText("*")
-        
-        
-        #GravaDadosCadastro()
-        
-    else:
-            
-        input_nome = tela_formulario.input_nome.text()
-        input_endereco = tela_formulario.input_endereco.text()
-        input_cep = tela_formulario.input_cep.text()
-        input_uf = tela_formulario.input_uf.text()
-        input_cidade = tela_formulario.input_cidade.text()
-        input_TelefoneFixo = tela_formulario.input_TelefoneFixo.text()
-        input_TelefoneCelular = tela_formulario.input_TelefoneCelular.text()
-        input_email = tela_formulario.input_email.text()
-        
-        send_db = data_base.WriteDb(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
+    send_db = dados_pfisica.DadosPfisica(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
+    #send_db = data_base.WriteDb(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
 
         
     input_cpf = tela_formulario.input_cpf.clear()

@@ -38,12 +38,14 @@ def TelaFormulario():
     tela_formulario.show()
 
 def Volta_for_login():
+    tela_login.aviso_login.clear()
     tela_opcoes.close()
     tela_login.line_user.clear()
     tela_login.line_pwd.clear()
     tela_login.show()
 
 def Volta_for_login_Two():
+    tela_login.aviso_login.clear()
     tela_criar_login.close()
     tela_login.line_user.clear()
     tela_login.line_pwd.clear()
@@ -54,6 +56,9 @@ def Volta_for_opcoes():
     tela_opcoes.show()
 
 def Criarlogin():
+    tela_criar_login.aviso_01.clear()
+    tela_criar_login.aviso_02.clear()
+    tela_criar_login.frame_1.close()
     tela_criar_login.line_new_user.clear()
     tela_criar_login.line_new_pwd.clear()
     tela_criar_login.aviso_cadastro.setText("")
@@ -61,33 +66,49 @@ def Criarlogin():
     tela_criar_login.show()
 
 def GravaDadosNewUser():
+    tela_criar_login.frame_1.close()
     tela_criar_login.aviso_cadastro.clear()
     new_user = tela_criar_login.line_new_user.text()
+    new_pwd = tela_criar_login.line_new_pwd.text()
     
     if not new_user:
+        tela_criar_login.aviso_01.setText("*")
+        tela_criar_login.aviso_02.setText("*")
         tela_criar_login.aviso_cadastro.setText("Preencha os campos corretamente")
-        return GravaDadosCadastro()
+        return GravaDadosNewUser()
+
+    if not new_pwd:
+        tela_criar_login.aviso_01.setText("*")
+        tela_criar_login.aviso_02.setText("*")
+        tela_criar_login.aviso_cadastro.setText("Preencha os campos corretamente")
+        return GravaDadosNewUser()
     
-    new_pwd = tela_criar_login.line_new_pwd.text()
-    new_up = str(new_user) + str(new_pwd)
-    new_hash = hashlib.sha256(new_up.encode('utf-8')).hexdigest()
+    else:
+        new_up = str(new_user) + str(new_pwd)
+        new_hash = hashlib.sha256(new_up.encode('utf-8')).hexdigest()
+        
+        result_db = teste.TesteTt()
     
-    result_db = teste.TesteTt()
     if new_hash in result_db.result_tabela:
         tela_criar_login.aviso_cadastro.setText("Usuário já existente.")
+        return GravaDadosNewUser()
+    
     else:
         send_db = data_base.NovoUser(usuario=new_user, senha=new_hash)
-        tela_criar_login.aviso_cadastro.setText("Login criado com sucesso.")
+        #tela_criar_login.aviso_login_criado.setText("Login criado com sucesso.")
+        tela_criar_login.frame_1.show()
+        #return GravaDadosNewUser()
 
 def GravaDadosCadastro():
 
-    input_cpf = tela_formulario.input_cpf.text()
+    input_cpf = str(tela_formulario.input_cpf.text())
+
     if not input_cpf.isdecimal():
         tela_formulario.aviso_dados_errados.setText("Favor preencha os campos corretamente")
         tela_formulario.aviso_01.setText("*")
         
         
-        GravaDadosCadastro()
+        #GravaDadosCadastro()
         
     else:
             
@@ -139,6 +160,7 @@ tela_criar_login.line_new_pwd.setEchoMode(QtWidgets.QLineEdit.Password)
 ## Tamanho das Janelas
 tela_login.setFixedSize(461,426)
 tela_criar_login.setFixedSize(461,426)
+tela_opcoes.setFixedSize(601,500)
 
 tela_login.show()
 app.exec()

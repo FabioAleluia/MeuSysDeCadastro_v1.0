@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mainWindow</class>
+ <widget class="QMainWindow" name="mainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>591</width>
+    <height>483</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string/>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background: #eaeaea;</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="new_cadastros">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>60</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	font: 14pt &quot;Arial&quot;;
+	border-radius: 11px;
+	color: #0f132e;
+	background-color:#96c3a6;
+}
+
+QPushButton:hover {
+   
+	background-color: #536d88;
+}</string>
+    </property>
+    <property name="text">
+     <string>Novo Cadastro</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="volta_for_opcoes">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>420</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	font: 12pt &quot;Arial&quot;;
+	border-radius: 11px;
+	color: #0f132e;
+	background-color: #FF6924;
+}
+
+QPushButton:hover {
+   
+	background-color: #FF793C;
+}</string>
+    </property>
+    <property name="text">
+     <string>Volta</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="volta_for_opcoes_2">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>420</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	font: 12pt &quot;Arial&quot;;
+	border-radius: 11px;
+	color: #0f132e;
+	background-color: #FF6924;
+}
+
+QPushButton:hover {
+   
+	background-color: #FF793C;
+}</string>
+    </property>
+    <property name="text">
+     <string>Sair</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="conulta_dados">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>130</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	font: 14pt &quot;Arial&quot;;
+	border-radius: 11px;
+	color: #0f132e;
+	background-color:#96c3a6;
+}
+
+QPushButton:hover {
+   
+	background-color: #536d88;
+}</string>
+    </property>
+    <property name="text">
+     <string>Consulta Dados</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

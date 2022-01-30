@@ -17,47 +17,25 @@ class DadosPfisica:
 
         
         ## Valida dados do Campo CPF
-        if not self.cpf:
-            print('Preencha o campo CPF')
+        valida_cpf = self.cpf
+        if valida_cpf.isnumeric():
+            print(valida_cpf)
+            valida_cpf = valida_cpf[0:11]
+            valida_cpf = len(valida_cpf)
+            print(valida_cpf)
             
-        
-        if self.cpf.isdigit(): # Contem algum digitio ?
-            cpf_onze = (self.cpf[:11])
-            cpf_onze = len(cpf_onze)
-        
-            if cpf_onze < 11 or cpf_onze > 11:
-                print('Cpf invalido')
-            
+            if valida_cpf < 11 or valida_cpf > 11:
+                print('cpf muinto grande')
             else:
-                print('Cpf valido')
-             
-        else:
-            print('Preencha o campo CPF')
+                valida_cpf = str(valida_cpf)
+                print('CPF VALIDO')
             
+        else:
+            print('CPF Invalido')
         
         ## Valida dados do Campo Nome
         if not self.nome:
-            print('Preencha o campo Nome')
-            
-        
-        if self.nome.isdigit():
-            self.nome = (self.nome[:10])
-            self.nome = len(self.nome)
-        
-            if self.nome < 5 or self.nome > 10:
-                print('Nome Curto')
-            
-            else:
-                print('Nome muito Grande')
-            
-            if self.nome.isalpha():
-                print('Não tem Numero')
-            
-            else:
-                print('Contem Numero')
-        else:
-            print('Preencha o Campo Nome')
-            
+            pass
         
         ## Valida dados do Campo Endereço
         if self.endereco.isdigit():
@@ -80,5 +58,6 @@ class DadosPfisica:
         
         if self.email.isdigit():
             pass
-    
-        send_db = data_base.WriteDb(cpf=self.cpf, nome=self.nome, endereco=self.endereco, cep=self.cep, uf=self.uf, cidade=self.cidade, telefonefixo=self.telefonefixo, telefonecelular=self.telefonecelular, email=self.email)
+        
+            
+        send_db = data_base.WriteDb(cpf=valida_cpf, nome=self.nome, endereco=self.endereco, cep=self.cep, uf=self.uf, cidade=self.cidade, telefonefixo=self.telefonefixo, telefonecelular=self.telefonecelular, email=self.email)

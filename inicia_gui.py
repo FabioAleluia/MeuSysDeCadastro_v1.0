@@ -1,3 +1,6 @@
+#import sys
+#sys.setrecursionlimit(20000)
+from os import PRIO_USER
 from time import sleep, time
 from tkinter import W
 from PyQt5 import uic,QtWidgets
@@ -101,32 +104,61 @@ def GravaDadosNewUser():
         tela_criar_login.frame_1.show()
         #return GravaDadosNewUser()
 
-class CadastroFisico:
-    def __init__(self):
-        #aviso = dados_pfisica.DadosPfisica()
-    
-        input_cpf = tela_formulario.input_cpf.text()
-        input_nome = tela_formulario.input_nome.text()
-        input_endereco = tela_formulario.input_endereco.text()
-        input_cep = tela_formulario.input_cep.text()
-        input_uf = tela_formulario.input_uf.text()
-        input_cidade = tela_formulario.input_cidade.text()
-        input_TelefoneFixo = tela_formulario.input_TelefoneFixo.text()
-        input_TelefoneCelular = tela_formulario.input_TelefoneCelular.text()
-        input_email = tela_formulario.input_email.text()
-
-        send_db = dados_pfisica.DadosPfisica(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
-
-class Notificacoes:
-    def __init__(self):
-        self.aviso_01 = tela_formulario.aviso_01.setText("*")
-        
-''''
+       
 def GravaDadosCadastro():
-    #aviso = dados_pfisica.DadosPfisica()
     
+    ## Valida dados do campo CPF
     input_cpf = tela_formulario.input_cpf.text()
+    valida_cpf = input_cpf
+    if valida_cpf.isnumeric():
+        valida_cpf = len(valida_cpf)
+        valida_cpf = int(valida_cpf)
+            
+        if valida_cpf < 11 or valida_cpf > 11:
+            print('CPF INVALIDO')
+            tela_formulario.aviso_01.setText("*")
+            erro_input_cpf = 0
+
+        if valida_cpf == 11:
+            input_cpf = str(input_cpf)
+            tela_formulario.aviso_01.setText("")
+            print(f'Seu CPF é {input_cpf}')
+        
+        else:
+            input_cpf = str(valida_cpf)
+            print('CPF VALIDO')
+            
+    else:
+        print('CPF Invalido')
+        tela_formulario.aviso_01.setText("*")
+        erro_input_cpf = 0
+   
+    ## Valida dados do campo Nome
     input_nome = tela_formulario.input_nome.text()
+    print(input_nome)
+    valida_nome = input_nome.replace(" ","")
+    print(valida_nome)
+    
+    if valida_nome.isalpha():
+        valida_nome = len(valida_nome)
+        print(valida_nome)
+        valida_nome = int(valida_nome)
+        
+        if valida_nome < 5 or valida_nome > 45:
+            print('Nome Invalido')
+            tela_formulario.aviso_02.setText("*")
+            erro_input_nome = 0
+        
+        if valida_nome >= 5 or valida_nome <= 45:
+            input_nome = str(valida_nome)
+            tela_formulario.aviso_02.setText("")
+            print('Nome Valido')
+        
+    else:
+        print('Nome invalido')
+        tela_formulario.aviso_02.setText("*")
+        erro_input_nome = 0
+    
     input_endereco = tela_formulario.input_endereco.text()
     input_cep = tela_formulario.input_cep.text()
     input_uf = tela_formulario.input_uf.text()
@@ -135,11 +167,19 @@ def GravaDadosCadastro():
     input_TelefoneCelular = tela_formulario.input_TelefoneCelular.text()
     input_email = tela_formulario.input_email.text()
 
-    send_db = dados_pfisica.DadosPfisica(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
-    #send_db = data_base.WriteDb(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
-'''
+    #send_db = dados_pfisica.DadosPfisica(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
+    if erro_input_nome == 0 or erro_input_cpf == 0:
+        tela_formulario.aviso_01.setText("*")
+        tela_formulario.aviso_02.setText("*")
+        print('Volta 1')
+        TelaFormulario()
+        print('Volta 2')
+    
+    else:
+        send_db = data_base.WriteDb(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
 
-def LimparCampos():        
+
+def LimparCampos():
     input_cpf = tela_formulario.input_cpf.clear()
     tela_formulario.aviso_dados_errados.setText("")
     tela_formulario.aviso_01.setText("")
@@ -170,7 +210,7 @@ tela_formulario.volta_for_opcoes.clicked.connect(Volta_for_opcoes)
 tela_login.criar_login.clicked.connect(Criarlogin)
 tela_criar_login.cadastra_user.clicked.connect(GravaDadosNewUser)
 tela_criar_login.volta_for_login.clicked.connect(Volta_for_login_Two)
-tela_formulario.salva_infos.clicked.connect(CadastroFisico)
+tela_formulario.salva_infos.clicked.connect(GravaDadosCadastro)
 tela_login.line_pwd.setEchoMode(QtWidgets.QLineEdit.Password)
 tela_criar_login.line_new_pwd.setEchoMode(QtWidgets.QLineEdit.Password)
 

@@ -123,6 +123,7 @@ def GravaDadosCadastro():
             input_cpf = str(input_cpf)
             tela_formulario.aviso_01.setText("")
             print(f'Seu CPF é {input_cpf}')
+            erro_input_cpf = 1
         
         else:
             input_cpf = str(valida_cpf)
@@ -150,10 +151,10 @@ def GravaDadosCadastro():
             erro_input_nome = 0
         
         if valida_nome >= 5 or valida_nome <= 45:
-            input_nome = str(valida_nome)
+            input_nome = str(input_nome)
             tela_formulario.aviso_02.setText("")
             print('Nome Valido')
-        
+            erro_input_nome = 1
     else:
         print('Nome invalido')
         tela_formulario.aviso_02.setText("*")
@@ -168,15 +169,26 @@ def GravaDadosCadastro():
     input_email = tela_formulario.input_email.text()
 
     #send_db = dados_pfisica.DadosPfisica(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
-    if erro_input_nome == 0 or erro_input_cpf == 0:
+    if erro_input_cpf == 0:
+        print('CPF INVALIDO')
         tela_formulario.aviso_01.setText("*")
-        tela_formulario.aviso_02.setText("*")
-        print('Volta 1')
-        TelaFormulario()
-        print('Volta 2')
+        return TelaFormulario()
     
     else:
-        send_db = data_base.WriteDb(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
+        pass
+        print('Next CPF')
+    
+    if erro_input_nome == 0:
+        print('NOME INVALIDO')
+        tela_formulario.aviso_02.setText("*")
+        return TelaFormulario()
+    
+    else:
+        pass
+        print('Next NOME')
+    
+    
+    send_db = data_base.WriteDb(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
 
 
 def LimparCampos():

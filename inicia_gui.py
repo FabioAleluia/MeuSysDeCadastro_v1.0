@@ -1,5 +1,3 @@
-#import sys
-#sys.setrecursionlimit(20000)
 from os import PRIO_USER
 from time import sleep, time
 from tkinter import W
@@ -100,10 +98,7 @@ def GravaDadosNewUser():
     
     else:
         send_db = data_base.NovoUser(usuario=new_user, senha=new_hash)
-        #tela_criar_login.aviso_login_criado.setText("Login criado com sucesso.")
         tela_criar_login.frame_1.show()
-        #return GravaDadosNewUser()
-
        
 def GravaDadosCadastro():
     
@@ -115,60 +110,82 @@ def GravaDadosCadastro():
         valida_cpf = int(valida_cpf)
             
         if valida_cpf < 11 or valida_cpf > 11:
-            print('CPF INVALIDO')
             tela_formulario.aviso_01.setText("*")
             erro_input_cpf = 0
 
         if valida_cpf == 11:
             input_cpf = str(input_cpf)
             tela_formulario.aviso_01.setText("")
-            print(f'Seu CPF é {input_cpf}')
             erro_input_cpf = 1
         
         else:
             input_cpf = str(valida_cpf)
-            print('CPF VALIDO')
             
     else:
-        print('CPF Invalido')
         tela_formulario.aviso_01.setText("*")
         erro_input_cpf = 0
    
-    ## Valida dados do campo Nome
+    ## VALIDA DADOS DO CAMPO NOME
     input_nome = tela_formulario.input_nome.text()
-    print(input_nome)
+    tela_formulario.aviso_02.clear()
     valida_nome = input_nome.replace(" ","")
-    print(valida_nome)
     
     if valida_nome.isalpha():
         valida_nome = len(valida_nome)
-        print(valida_nome)
         valida_nome = int(valida_nome)
         
         if valida_nome < 5 or valida_nome > 45:
-            print('Nome Invalido')
             tela_formulario.aviso_02.setText("*")
             erro_input_nome = 0
         
         if valida_nome >= 5 or valida_nome <= 45:
             input_nome = str(input_nome)
             tela_formulario.aviso_02.setText("")
-            print('Nome Valido')
             erro_input_nome = 1
     else:
-        print('Nome invalido')
         tela_formulario.aviso_02.setText("*")
         erro_input_nome = 0
     
+    ## VALIDA DADOS DO CAMPO ENDEREÇO
     input_endereco = tela_formulario.input_endereco.text()
+    valida_endereco = input_endereco.strip()
+    
+    if valida_endereco.isalnum():
+        valida_endereco = len(valida_endereco)
+        valida_endereco = int(valida_endereco)
+        
+        if valida_endereco <= 0 or valida_endereco > 200:
+            tela_formulario.aviso_03.setText("*")
+            erro_input_endereco = 0
+        
+        if valida_endereco >= 5 or valida_endereco <=200:
+            tela_formulario.aviso_03.setText("")
+            valida_endereco = str(input_endereco)
+            erro_input_endereco = 1
+    
+    else:
+        tela_formulario.aviso_03.setText("*")
+        erro_input_endereco = 0
+    
+    ## VALIDA DADOS DO CAMPO
     input_cep = tela_formulario.input_cep.text()
+    
+    ## VALIDA DADOS DO CAMPO
     input_uf = tela_formulario.input_uf.text()
+    
+    ## VALIDA DADOS DO CAMPO
     input_cidade = tela_formulario.input_cidade.text()
+    
+    ## VALIDA DADOS DO CAMPO TELEFONE
     input_TelefoneFixo = tela_formulario.input_TelefoneFixo.text()
+    
+    ## VALIDA DADOS DO CAMPO TELEFONE CELULAR
     input_TelefoneCelular = tela_formulario.input_TelefoneCelular.text()
+    
+    ## VALIDA DADOS DO CAMPO E-MAIL
     input_email = tela_formulario.input_email.text()
 
-    #send_db = dados_pfisica.DadosPfisica(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
+    # CHECAGEM DE ERROS DAS ENTRADAS DOS DADOS
     if erro_input_cpf == 0:
         print('CPF INVALIDO')
         tela_formulario.aviso_01.setText("*")
@@ -187,14 +204,22 @@ def GravaDadosCadastro():
         pass
         print('Next NOME')
     
+    if erro_input_endereco == 0:
+        tela_formulario.aviso_03.setText("*")
+        return TelaFormulario()
+    
+    else:
+        pass
+        print('Next ENDEREÇO')
     
     send_db = data_base.WriteDb(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
-
 
 def LimparCampos():
     input_cpf = tela_formulario.input_cpf.clear()
     tela_formulario.aviso_dados_errados.setText("")
     tela_formulario.aviso_01.setText("")
+    tela_formulario.aviso_02.setText("")
+    tela_formulario.aviso_03.setText("")
     input_nome = tela_formulario.input_nome.clear()
     input_endereco = tela_formulario.input_endereco.clear()
     input_cep = tela_formulario.input_cep.clear()

@@ -1,9 +1,11 @@
 from os import PRIO_USER
 from time import sleep, time
 from tkinter import W
+from urllib import request
 from PyQt5 import uic,QtWidgets
 import hashlib
 import sqlite3
+import requests
 from Banco_db import data_base
 from Banco_db import query_db
 from Banco_db import teste
@@ -103,7 +105,7 @@ def GravaDadosNewUser():
 def GravaDadosCadastro():
     
     ## Valida dados do campo CPF
-    input_cpf = tela_formulario.input_cpf.text()
+    input_cpf = tela_formulario.a_input_cpf.text()
     valida_cpf = input_cpf
     if valida_cpf.isnumeric():
         valida_cpf = len(valida_cpf)
@@ -126,7 +128,7 @@ def GravaDadosCadastro():
         erro_input_cpf = 0
    
     ## VALIDA DADOS DO CAMPO NOME
-    input_nome = tela_formulario.input_nome.text()
+    input_nome = tela_formulario.a_input_nome.text()
     tela_formulario.aviso_02.clear()
     valida_nome = input_nome.replace(" ","")
     
@@ -145,31 +147,70 @@ def GravaDadosCadastro():
     else:
         tela_formulario.aviso_02.setText("*")
         erro_input_nome = 0
+
+    ## VALIDA DADOS DO CAMPO CEP
+    input_cep = tela_formulario.a_input_cep.text()
+    valida_cep = input_cep
+    
+    if input_cep.isnumeric():
+        valida_cep = len(valida_cep)
+        valida_cep = int(valida_cep)
+
+        if valida_cep < 8 or valida_cep > 8:
+            tela_formulario.aviso_03.setText("*")
+            erro_input_cep = 0
+        
+        if valida_cep == 8:
+            input_cep = str(input_cep)
+            tela_formulario.aviso_03.setText("")
+            erro_input_cep = 1
+            
+            r = requests.get('https://viacep.com.br/ws/{}/json/'.format(input_cep))
+            result_r = r.json()
+            
+            if 'erro' in result_r:
+                tela_formulario.aviso_03.setText("*")
+                return tela_formulario
+            
+            uf = (result_r['uf'])
+            localidade = (result_r['localidade'])
+            logradouro = (result_r['logradouro'])
+            
+            tela_formulario.input_uf.setText(uf)
+            tela_formulario.input_cidade.setText(localidade)
+            tela_formulario.input_endereco.setText(logradouro)
+                        
+        
+        else:
+            input_cep = str(input_cep)
+    
+    else:
+        tela_formulario.aviso_03.setText("*")
+        erro_input_cep = 0
     
     ## VALIDA DADOS DO CAMPO ENDEREÇO
     input_endereco = tela_formulario.input_endereco.text()
     valida_endereco = input_endereco.strip()
+    valida_endereco = valida_endereco.replace(" ", "")
     
     if valida_endereco.isalnum():
         valida_endereco = len(valida_endereco)
         valida_endereco = int(valida_endereco)
         
         if valida_endereco <= 0 or valida_endereco > 200:
-            tela_formulario.aviso_03.setText("*")
+            tela_formulario.aviso_06.setText("*")
             erro_input_endereco = 0
         
         if valida_endereco >= 5 or valida_endereco <=200:
-            tela_formulario.aviso_03.setText("")
+            tela_formulario.aviso_06.setText("")
             valida_endereco = str(input_endereco)
             erro_input_endereco = 1
     
     else:
-        tela_formulario.aviso_03.setText("*")
+        tela_formulario.aviso_06.setText("*")
         erro_input_endereco = 0
     
-    ## VALIDA DADOS DO CAMPO
-    input_cep = tela_formulario.input_cep.text()
-    
+        
     ## VALIDA DADOS DO CAMPO
     input_uf = tela_formulario.input_uf.text()
     
@@ -187,7 +228,6 @@ def GravaDadosCadastro():
 
     # CHECAGEM DE ERROS DAS ENTRADAS DOS DADOS
     if erro_input_cpf == 0:
-        print('CPF INVALIDO')
         tela_formulario.aviso_01.setText("*")
         return TelaFormulario()
     
@@ -205,24 +245,35 @@ def GravaDadosCadastro():
         print('Next NOME')
     
     if erro_input_endereco == 0:
-        tela_formulario.aviso_03.setText("*")
+        tela_formulario.aviso_06.setText("*")
         return TelaFormulario()
     
     else:
         pass
         print('Next ENDEREÇO')
     
+    if erro_input_cep == 0:
+        tela_formulario.aviso_06.setText("*")
+        return TelaFormulario()
+    
+    else:
+        pass
+        print('Next CEP')
+    
     send_db = data_base.WriteDb(cpf=input_cpf, nome=input_nome, endereco=input_endereco, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
 
 def LimparCampos():
-    input_cpf = tela_formulario.input_cpf.clear()
+    input_cpf = tela_formulario.a_input_cpf.clear()
     tela_formulario.aviso_dados_errados.setText("")
     tela_formulario.aviso_01.setText("")
     tela_formulario.aviso_02.setText("")
     tela_formulario.aviso_03.setText("")
-    input_nome = tela_formulario.input_nome.clear()
+    tela_formulario.aviso_04.setText("")
+    tela_formulario.aviso_05.setText("")
+    tela_formulario.aviso_06.setText("")
+    input_nome = tela_formulario.a_input_nome.clear()
     input_endereco = tela_formulario.input_endereco.clear()
-    input_cep = tela_formulario.input_cep.clear()
+    input_cep = tela_formulario.a_input_cep.clear()
     input_uf = tela_formulario.input_uf.clear()
     input_cidade = tela_formulario.input_cidade.clear()
     input_TelefoneFixo = tela_formulario.input_TelefoneFixo.clear()

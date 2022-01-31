@@ -1,10 +1,11 @@
 import sqlite3
 
 class WriteDb:
-    def __init__(self, cpf, nome, endereco, cep, uf, cidade, telefonefixo, telefonecelular, email):
+    def __init__(self, cpf, nome, endereco, numero, cep, uf, cidade, telefonefixo, telefonecelular, email):
         self.cpf = cpf
         self.nome = nome
         self.endereco = endereco
+        self.numero = numero
         self.cep = cep
         self.uf = uf
         self.cidade = cidade
@@ -28,7 +29,7 @@ class WriteDb:
             )""")
         '''
 
-        cursor.execute("INSERT INTO pessoafisica VALUES ('"+self.cpf+"', '"+self.nome+"', '"+self.endereco+"', '"+self.cep+"', '"+self.uf+"', '"+self.cidade+"', '"+self.telefonefixo+"', '"+self.telefonecelular+"', '"+self.email+"')")
+        cursor.execute("INSERT INTO pessoafisica VALUES ('"+self.cpf+"', '"+self.nome+"', '"+self.endereco+"', '"+self.numero+"', '"+self.cep+"', '"+self.uf+"', '"+self.cidade+"', '"+self.telefonefixo+"', '"+self.telefonecelular+"', '"+self.email+"')")
 
         conexao_db.commit()
         conexao_db.close()

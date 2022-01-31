@@ -272,19 +272,53 @@ def GravaDadosCadastro():
     input_TelefoneFixo = tela_formulario.input_TelefoneFixo.text()
     valida_telefonefixo = input_TelefoneFixo
     
-    if valida_telefonefixo.isnumerci():
+    if valida_telefonefixo.isnumeric():
         valida_telefonefixo = len(valida_telefonefixo)
         valida_telefonefixo = int(valida_telefonefixo)
         
-        if valida_telefonefixo < 10 or valida_telefonefixo > 10:
+        if valida_telefonefixo < 11 or valida_telefonefixo > 11:
             tela_formulario.aviso_07.setText("*")
             erro_input_telefonefixo = 0
-    
+        
+        if valida_telefonefixo == 11:
+            input_TelefoneFixo = str(input_TelefoneFixo.strip())
+            input_TelefoneFixo = input_TelefoneFixo.replace(" ", "")
+            tela_formulario.aviso_07.setText("")
+            tela_formulario.input_TelefoneFixo.setText(input_TelefoneFixo)
+            erro_input_telefonefixo = 1
+    else:
+        tela_formulario.aviso_07.setText("*")
+        erro_input_telefonefixo = 0
+        
     ## VALIDA DADOS DO CAMPO TELEFONE CELULAR
     input_TelefoneCelular = tela_formulario.input_TelefoneCelular.text()
+    valida_telefonecelular = input_TelefoneCelular
+    
+    if valida_telefonecelular.isnumeric():
+        valida_telefonecelular = len(valida_telefonecelular)
+        valida_telefonecelular = int(valida_telefonecelular)
+        
+        if valida_telefonecelular < 11 or valida_telefonecelular > 11:
+            tela_formulario.aviso_08.setText("*")
+            erro_input_telefonecelular = 0
+        
+        if valida_telefonecelular == 11:
+            input_TelefoneCelular = str(input_TelefoneCelular.strip())
+            input_TelefoneCelular = input_TelefoneCelular.replace(" ", "")
+            tela_formulario.aviso_08.setText("")
+            tela_formulario.input_TelefoneCelular.setText(input_TelefoneCelular)
+            erro_input_telefonecelular = 1
+    
+    else:
+        tela_formulario.aviso_08.setText("*")
+        erro_input_telefonecelular = 0
+            
     
     ## VALIDA DADOS DO CAMPO E-MAIL
     input_email = tela_formulario.input_email.text()
+    valida_email = input_email
+    
+    
 
     # CHECAGEM DE ERROS DAS ENTRADAS DOS DADOS
     if erro_input_cpf == 0:
@@ -344,6 +378,22 @@ def GravaDadosCadastro():
         pass
         print('Next CIDADE')
         
+    if erro_input_telefonefixo == 0:
+        tela_formulario.aviso_07.setText("*")
+        return TelaFormulario()
+
+    else:
+        pass
+        print('Next Telefone Fixo')
+    
+    if valida_telefonecelular == 0:
+        tela_formulario.aviso_08.setText("*")
+        return TelaFormulario()
+    
+    else:
+        pass
+        print('Next Telefone Celular')    
+            
     send_db = data_base.WriteDb(cpf=input_cpf, nome=input_nome, endereco=input_endereco, numero=input_numero, cep=input_cep, uf=input_uf, cidade=input_cidade, telefonefixo=input_TelefoneFixo, telefonecelular=input_TelefoneCelular, email=input_email)
 
 
@@ -356,6 +406,8 @@ def LimparCampos():
     tela_formulario.aviso_04.setText("")
     tela_formulario.aviso_05.setText("")
     tela_formulario.aviso_06.setText("")
+    tela_formulario.aviso_07.setText("")
+    tela_formulario.aviso_08.setText("")
     input_nome = tela_formulario.a_input_nome.clear()
     input_endereco = tela_formulario.input_endereco.clear()
     input_cep = tela_formulario.a_input_cep.clear()

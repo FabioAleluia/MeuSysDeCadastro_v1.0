@@ -480,7 +480,7 @@ QLineEdit:focus {
      </font>
     </property>
     <property name="text">
-     <string>Telefone Celular</string>
+     <string>Telefone 2</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="input_endereco">
@@ -590,7 +590,7 @@ QLineEdit:focus {
      <set>Qt::AlignCenter</set>
     </property>
     <property name="placeholderText">
-     <string>Opcional</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="input_TelefoneCelular">
@@ -653,7 +653,7 @@ QLineEdit:focus {
      </font>
     </property>
     <property name="text">
-     <string>Telefone Fixo</string>
+     <string>Telefone 1</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="input_email">
@@ -1024,6 +1024,68 @@ QLineEdit:focus {
     </property>
     <property name="text">
      <string>Numero</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="aviso_07">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>300</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>15</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 85, 85);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="aviso_08">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>300</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>15</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 85, 85);</string>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
